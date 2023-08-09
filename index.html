@@ -1,10 +1,7 @@
 <html
   id="html"
   data-lt-installed="true"
-  style="
-    background-image: url('https://awswithscott.s3.amazonaws.com/assets/images/14-142547_cloud-clouds-background-for-death.jpg');
-    background-color: black;
-  "
+  style="background-image: url('./files/b1.jpg'); background-color: black"
 >
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
@@ -110,12 +107,21 @@
         <option value="4">AWS IS HOW Buffet</option>
         <option value="5">Seattle Amazon Spheres</option>
         <option value="6">Plain Black BG</option>
+        <option value="7">DinoCloud</option>
       </select>
+      <p></p>
+      <select name="logos" onchange="changeLogo(this)">
+        <option value="0">Select Logo</option>
+        <option value="1">AWS</option>
+        <option value="2">DinoCloud</option>
+      </select>
+
       <p id="toptextp">
         <input type="text" id="toptext" placeholder="Text Above Timer" />
       </p>
       <div id="clockdiv" onclick="killClock()">
         <img
+          id="clockImage"
           src="./files/aws.png"
           width="120"
           style="margin: 0 0 20px 0"
@@ -288,19 +294,23 @@
         switch (bg) {
           case 2:
             document.getElementById("html").style.backgroundImage =
-              "url('https://awswithscott.s3.amazonaws.com/assets/images/1532410315920.jpg')";
+              "url('./files/1532410315920.jpg')";
             break;
           case 3:
             document.getElementById("html").style.backgroundImage =
-              "url('https://awswithscott.s3.amazonaws.com/assets/images/14-142547_cloud-clouds-background-for-death.jpg')";
+              "url('./files/b1.jpg')";
             break;
           case 4:
             document.getElementById("html").style.backgroundImage =
-              "url('https://awswithscott.s3.amazonaws.com/assets/images/buffet.jpg')";
+              "url('./files//buffet.jpg')";
             break;
           case 5:
             document.getElementById("html").style.backgroundImage =
-              "url('https://awswithscott.s3.amazonaws.com/assets/images/The-Spheres-01.jpg')";
+              "url('./files//The-Spheres-01.jpg')";
+            break;
+          case 7:
+            document.getElementById("html").style.backgroundImage =
+              "url('./files/fondoDino.png')";
             break;
           case 1:
             document.getElementById("html").style.backgroundImage = "none";
@@ -313,6 +323,35 @@
             document.getElementById("html").style.backgroundImage = "none";
         }
       }
+
+      function setLOGO(bg) {
+        switch (bg) {
+          case 1:
+            document.getElementById("html").style.backgroundImage =
+              "url('./files/aws.png')";
+            break;
+          case 2:
+            document.getElementById("html").style.backgroundImage =
+              "url('./files/dino.png')";
+            break;
+        }
+      }
+
+      function changeLogo(selectElement) {
+        const clockImage = document.getElementById("clockImage");
+        switch (selectElement.selectedIndex) {
+          case 1:
+            clockImage.src = "./files/aws.png";
+            break;
+          case 2:
+            clockImage.src = "./files/dino.png";
+            break;
+          default:
+            clockImage.src = ""; // Cambiar a la imagen por defecto o hacer algo diferente si es necesario
+            break;
+        }
+      }
+
       function getTimeRemaining(endtime) {
         var t = Date.parse(endtime) - Date.parse(new Date());
         var seconds = Math.floor((t / 1000) % 60);
