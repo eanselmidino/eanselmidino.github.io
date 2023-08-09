@@ -1,0 +1,429 @@
+<html
+  id="html"
+  data-lt-installed="true"
+  style="
+    background-image: url('https://awswithscott.s3.amazonaws.com/assets/images/14-142547_cloud-clouds-background-for-death.jpg');
+    background-color: black;
+  "
+>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <script src="./files/jquery-1.12.4.js"></script>
+    <script src="./files/jquery-ui.js"></script>
+    <script src="./files/moment.js"></script>
+    <script src="./files/moment-timezone.with-data.js"></script>
+    <script src="./files/loadtzdata.min.js"></script>
+    <link rel="stylesheet" href="./files/jquery-ui.css" />
+    <style>
+      html {
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+      body {
+        text-align: center;
+        font-family: sans-serif;
+        font-weight: 100;
+      }
+      h1 {
+        color: darkorange;
+        font-weight: 100;
+        font-size: 40px;
+        margin: 40px 0px 20px;
+      }
+      #clockdiv {
+        font-family: sans-serif;
+        color: darkorange;
+        display: inline-block;
+        font-weight: 100;
+        text-align: center;
+        font-size: 30px;
+        width: auto;
+        border: 2px solid darkorange;
+        padding: 20px;
+        background: white;
+      }
+      #clockdiv > div {
+        padding: 10px;
+        border-radius: 3px;
+        background: lightskyblue;
+        display: inline-block;
+      }
+      #clockdiv div > span {
+        padding: 15px;
+        border-radius: 3px;
+        background: #000000;
+        display: inline-block;
+      }
+      .smalltext {
+        padding-top: 5px;
+        font-size: 20px;
+        font-weight: bold;
+        color: black;
+      }
+      #custom-handle {
+        width: 2em;
+        height: 1.6em;
+        top: 50%;
+        margin-top: -0.8em;
+        text-align: center;
+        line-height: 1.6em;
+      }
+      #slider {
+        margin: 20px auto;
+        width: 300px;
+      }
+      #toptextp,
+      #bottomtextp {
+        font-size: 2em;
+      }
+      div#exptime,
+      div#exptime span {
+        background: none;
+        color: black;
+        font-size: 0.5em;
+      }
+      div#exptime span {
+        font-size: 1em;
+        position: relative;
+      }
+      #bottomtextp,
+      #toptextp {
+        font-weight: bold;
+        text-shadow: 2px 2px 2px black;
+        color: orange;
+      }
+      #handleTitle {
+        font-size: 10px;
+        margin-left: 130px;
+      }
+    </style>
+  </head>
+  <body data-new-gr-c-s-check-loaded="14.1115.0" data-gr-ext-installed="">
+    <div>
+      <select name="backgrounds" onchange="setBG(this.options.selectedIndex)">
+        <option value="0">Select Background</option>
+        <option value="1">Plain White BG</option>
+        <option value="2">Tropical Paradise</option>
+        <option value="3">In The Clouds</option>
+        <option value="4">AWS IS HOW Buffet</option>
+        <option value="5">Seattle Amazon Spheres</option>
+        <option value="6">Plain Black BG</option>
+      </select>
+      <p id="toptextp">
+        <input type="text" id="toptext" placeholder="Text Above Timer" />
+      </p>
+      <div id="clockdiv" onclick="killClock()">
+        <img
+          src="./files/aws.png"
+          width="120"
+          style="margin: 0 0 20px 0"
+        /><br />
+        <div>
+          <span class="hours">00</span>
+          <div class="smalltext">H</div>
+        </div>
+        <div>
+          <span class="minutes">09</span>
+          <div class="smalltext">M</div>
+        </div>
+        <div>
+          <span class="seconds">59</span>
+          <div class="smalltext">S</div>
+        </div>
+        <br />
+        <div id="exptime" style="margin: -20px 0px">
+          <span id="sysTime" style="display: inline-block"
+            >Current System Time:16:05</span
+          ><br /><select
+            id="listTZ"
+            onchange="setTZ(this.options[this.selectedIndex].value)"
+            style="display: inline-block"
+          >
+            <option value="0">LA / VANCOUVER</option>
+            <option value="1">DENVER / CALGARY</option>
+            <option value="2">CHICAGO / WINNIPEG</option>
+            <option value="3">NY / TORONTO</option>
+            <option value="4">HALIFAX</option>
+            <option value="5">NFLD</option>
+            <option value="6">LONDON / LISBON</option>
+            <option value="7">PARIS / STOCKHOLM</option>
+            <option value="8">HELSINKI / JOHANNESBURG</option>
+            <option value="9">DOHA / RIYADH</option>
+            <option value="10">INDIA / KOLKATA</option>
+            <option value="11">HONG KONG / SIGNAPORE</option>
+            <option value="12">TOKYO</option>
+            <option value="13">BUENOS AIRES</option>
+            <option value="14">SYDNEY</option></select
+          ><br /><span id="selTZ" style="display: inline-block"
+            >Selected TZ:EDT</span
+          ><br />Time expires at:<span
+            id="endtimespan"
+            style="margin-left: -10px"
+            >15:14</span
+          ><span id="TZsuffix" style="display: inline-block">EDT</span>
+        </div>
+      </div>
+      <div
+        id="slider"
+        class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+        style="display: block"
+      >
+        <div
+          id="custom-handle"
+          class="ui-slider-handle ui-corner-all ui-state-default"
+          tabindex="0"
+          style="left: 7.56303%"
+        >
+          10
+        </div>
+        <span id="handleTitle">minutes</span>
+      </div>
+      <div id="tz"></div>
+      <p id="bottomtextp">
+        <input type="text" id="bottomtext" placeholder="Text Below Timer" />
+      </p>
+      <p id="info" style="display: block">
+        Once started, click anywhere inside the timer to reset
+      </p>
+      <input
+        type="button"
+        id="startclock"
+        value="START"
+        onclick="initializeClock()"
+        style="display: inline-block"
+      />
+    </div>
+    <script>
+      var sysTimeObj = setInterval(function () {
+        sysTimer();
+      }, 1000);
+      function sysTimer() {
+        var sysDateObj = new Date();
+        $("#sysTime").html(
+          "Current System Time:" +
+            ("0" + sysDateObj.getHours()).slice(-2) +
+            ":" +
+            ("0" + sysDateObj.getMinutes()).slice(-2)
+        );
+      }
+      function getStoredTZ() {
+        var pullTZ = localStorage.getItem("awsws.classroomtimer.storedTZ");
+        selTZ = typeof pullTZ == "undefined" || pullTZ == null ? 0 : pullTZ;
+        setTZ(selTZ);
+        $("#listTZ option").eq(pullTZ).prop("selected", true);
+      }
+      function setTZ(tzInput) {
+        switch (tzInput) {
+          case "3":
+            selTZ = moment.tz("Americas/New_York");
+            globalTZ = "Americas/New_York";
+            break;
+          case "4":
+            selTZ = moment.tz("Americas/Halifax");
+            globalTZ = "Americas/Halifax";
+            break;
+          case "5":
+            selTZ = moment.tz("Americas/St.Johns");
+            globalTZ = "Americas/St.Johns";
+            break;
+          case "2":
+            selTZ = moment.tz("Americas/Chicago");
+            globalTZ = "Americas/Chicago";
+            break;
+          case "1":
+            selTZ = moment.tz("Americas/Denver");
+            globalTZ = "Americas/Denver";
+            break;
+          case "0":
+            selTZ = moment.tz("Americas/Los_Angeles");
+            globalTZ = "Americas/Los_Angeles";
+            break;
+          case "6":
+            selTZ = moment.tz("Europe/London");
+            globalTZ = "Europe/London";
+            break;
+          case "7":
+            selTZ = moment.tz("Europe/Paris");
+            globalTZ = "Europe/Paris";
+            break;
+          case "8":
+            selTZ = moment.tz("Europe/Helsinki");
+            globalTZ = "Europe/Helsinki";
+            break;
+          case "9":
+            selTZ = moment.tz("Asia/Riyadh");
+            globalTZ = "Asia/Riyadh";
+            break;
+          case "11":
+            selTZ = moment.tz("Asia/Hong_Kong");
+            globalTZ = "Asia/Hong_Kong";
+            break;
+          case "12":
+            selTZ = moment.tz("Asia/Tokyo");
+            globalTZ = "Asia/Tokyo";
+            break;
+          case "14":
+            selTZ = moment.tz("Australia/Sydney");
+            globalTZ = "Australia/Sydney";
+            break;
+          case "13":
+            selTZ = moment.tz("Argentina/Buenos_Aires");
+            globalTZ = "Argentina/Buenos_Aires";
+            break;
+          case "10":
+            selTZ = moment.tz("Asia/Kolkata");
+            globalTZ = "Asia/Kolkata";
+            break;
+          default:
+            selTZ = moment.tz("Argentina/Buenos_Aires");
+            globalTZ = "Argentina/Buenos_Aires";
+        }
+        $("#selTZ").html("Selected TZ:" + selTZ.format("zz"));
+        $("#TZsuffix").html(selTZ.format("zz"));
+        localStorage.setItem("awsws.classroomtimer.storedTZ", tzInput);
+      }
+      function setBG(bg) {
+        switch (bg) {
+          case 2:
+            document.getElementById("html").style.backgroundImage =
+              "url('https://awswithscott.s3.amazonaws.com/assets/images/1532410315920.jpg')";
+            break;
+          case 3:
+            document.getElementById("html").style.backgroundImage =
+              "url('https://awswithscott.s3.amazonaws.com/assets/images/14-142547_cloud-clouds-background-for-death.jpg')";
+            break;
+          case 4:
+            document.getElementById("html").style.backgroundImage =
+              "url('https://awswithscott.s3.amazonaws.com/assets/images/buffet.jpg')";
+            break;
+          case 5:
+            document.getElementById("html").style.backgroundImage =
+              "url('https://awswithscott.s3.amazonaws.com/assets/images/The-Spheres-01.jpg')";
+            break;
+          case 1:
+            document.getElementById("html").style.backgroundImage = "none";
+            document.getElementById("html").style.backgroundColor = "white";
+            break;
+          case 6:
+            document.getElementById("html").style.backgroundImage = "none";
+            document.getElementById("html").style.backgroundColor = "black";
+            break;
+            document.getElementById("html").style.backgroundImage = "none";
+        }
+      }
+      function getTimeRemaining(endtime) {
+        var t = Date.parse(endtime) - Date.parse(new Date());
+        var seconds = Math.floor((t / 1000) % 60);
+        var minutes = Math.floor((t / 1000 / 60) % 60);
+        var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+        return { total: t, hours: hours, minutes: minutes, seconds: seconds };
+      }
+      function killClock() {
+        $("#toptextp").text($("#toptextp input").val());
+        $(
+          "#startclock, #slider, #info, #listTZ, #selTZ, #sysTime, #TZsuffix"
+        ).fadeIn();
+        $("#toptextp")
+          .html(
+            '<input type="text" id="toptext" placeholder="Text Above Timer"/>'
+          )
+          .fadeIn();
+        $("#bottomtextp")
+          .html(
+            '<input type="text" id="bottomtext" placeholder="Text Below Timer"/>'
+          )
+          .fadeIn();
+        $("#exptime").css({ "margin-top": "-20px" });
+        try {
+          clearInterval(timeinterval);
+        } catch (e) {}
+      }
+      function initializeClock() {
+        $(
+          "#startclock, #slider, #bottomtextp input, #toptextp input, #info, #listTZ, #selTZ, #sysTime, #TZsuffix"
+        ).hide();
+        $("#exptime").css({ "margin-top": "-60px" });
+        var clock = document.getElementById("clockdiv");
+        var hoursSpan = clock.querySelector(".hours");
+        var minutesSpan = clock.querySelector(".minutes");
+        var secondsSpan = clock.querySelector(".seconds");
+        minutesval = document.getElementById("custom-handle").innerHTML;
+        endtime = moment().tz(globalTZ).add(minutesval, "m");
+        console.log(endtime);
+        expHours = moment().tz(globalTZ).add(minutesval, "m").format("HH");
+        expMin = moment().tz(globalTZ).add(minutesval, "m").format("mm");
+        $("#endtimespan").text(
+          ("0" + expHours).slice(-2) + ":" + ("0" + expMin).slice(-2)
+        );
+        $("#toptextp").text($("#toptextp input").val());
+        $("#bottomtextp").text($("#bottomtextp input").val());
+        function updateClock() {
+          endtime = new Date(endtime);
+          var t = getTimeRemaining(endtime);
+          hoursSpan.innerHTML = ("0" + t.hours).slice(-2);
+          minutesSpan.innerHTML = ("0" + t.minutes).slice(-2);
+          secondsSpan.innerHTML = ("0" + t.seconds).slice(-2);
+          if (t.hours == 0 && t.minutes == 0 && t.seconds == 0) {
+            clearInterval(timeinterval);
+          }
+        }
+        updateClock();
+        timeinterval = setInterval(updateClock, 1000);
+      }
+      $(function () {
+        var handle = $("#custom-handle");
+        $("#slider").slider({
+          min: 1,
+          max: 120,
+          step: 1,
+          create: function () {
+            handle.text($(this).slider("value"));
+          },
+          slide: function (event, ui) {
+            handle.text(ui.value);
+            minutesval = ui.value;
+            endtime = moment().tz(globalTZ).add(minutesval, "m");
+            expHours = moment().tz(globalTZ).add(minutesval, "m").format("HH");
+            expMin = moment().tz(globalTZ).add(minutesval, "m").format("mm");
+            $("#endtimespan")
+              .text(("0" + expHours).slice(-2) + ":" + ("0" + expMin).slice(-2))
+              .css("margin-left", "-10px");
+          },
+        });
+      });
+    </script>
+  </body>
+  <grammarly-desktop-integration data-grammarly-shadow-root="true"
+    ><template shadowrootmode="open"
+      ><style>
+        div.grammarly-desktop-integration {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+          -moz-user-select: none;
+          -webkit-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+
+        div.grammarly-desktop-integration:before {
+          content: attr(data-content);
+        }
+      </style>
+      <div
+        aria-label="grammarly-integration"
+        role="group"
+        tabindex="-1"
+        class="grammarly-desktop-integration"
+        data-content='{"mode":"full","isActive":true,"isUserDisabled":false}'
+      ></div></template
+  ></grammarly-desktop-integration>
+</html>
