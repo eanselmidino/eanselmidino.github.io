@@ -102,23 +102,6 @@
   </head>
   <body data-new-gr-c-s-check-loaded="14.1115.0" data-gr-ext-installed="">
     <div>
-      <select name="backgrounds" onchange="setBG(this.options.selectedIndex)">
-        <option value="0">Select Background</option>
-        <option value="1">Plain White BG</option>
-        <option value="2">Tropical Paradise</option>
-        <option value="3">In The Clouds</option>
-        <option value="4">AWS IS HOW Buffet</option>
-        <option value="5">Seattle Amazon Spheres</option>
-        <option value="6">Plain Black BG</option>
-        <option value="7">DinoCloud</option>
-      </select>
-      <p></p>
-      <select name="logos" onchange="changeLogo(this)">
-        <option value="0">Select Logo</option>
-        <option value="1">AWS</option>
-        <option value="2">DinoCloud</option>
-      </select>
-
       <p id="toptextp">
         <input type="text" id="toptext" placeholder="Text Above Timer" />
       </p>
@@ -293,67 +276,6 @@
         $("#TZsuffix").html(selTZ.format("zz"));
         localStorage.setItem("awsws.classroomtimer.storedTZ", tzInput);
       }
-      function setBG(bg) {
-        switch (bg) {
-          case 2:
-            document.getElementById("html").style.backgroundImage =
-              "url('./files/1532410315920.jpg')";
-            break;
-          case 3:
-            document.getElementById("html").style.backgroundImage =
-              "url('./files/b1.jpg')";
-            break;
-          case 4:
-            document.getElementById("html").style.backgroundImage =
-              "url('./files//buffet.jpg')";
-            break;
-          case 5:
-            document.getElementById("html").style.backgroundImage =
-              "url('./files//The-Spheres-01.jpg')";
-            break;
-          case 7:
-            document.getElementById("html").style.backgroundImage =
-              "url('./files/fondoDino.png')";
-            break;
-          case 1:
-            document.getElementById("html").style.backgroundImage = "none";
-            document.getElementById("html").style.backgroundColor = "white";
-            break;
-          case 6:
-            document.getElementById("html").style.backgroundImage = "none";
-            document.getElementById("html").style.backgroundColor = "black";
-            break;
-            document.getElementById("html").style.backgroundImage = "none";
-        }
-      }
-
-      function setLOGO(bg) {
-        switch (bg) {
-          case 1:
-            document.getElementById("html").style.backgroundImage =
-              "url('./files/aws.png')";
-            break;
-          case 2:
-            document.getElementById("html").style.backgroundImage =
-              "url('./files/dino.png')";
-            break;
-        }
-      }
-
-      function changeLogo(selectElement) {
-        const clockImage = document.getElementById("clockImage");
-        switch (selectElement.selectedIndex) {
-          case 1:
-            clockImage.src = "./files/aws.png";
-            break;
-          case 2:
-            clockImage.src = "./files/dino.png";
-            break;
-          default:
-            clockImage.src = ""; // Cambiar a la imagen por defecto o hacer algo diferente si es necesario
-            break;
-        }
-      }
 
       function getTimeRemaining(endtime) {
         var t = Date.parse(endtime) - Date.parse(new Date());
@@ -437,35 +359,4 @@
       });
     </script>
   </body>
-  <grammarly-desktop-integration data-grammarly-shadow-root="true"
-    ><template shadowrootmode="open"
-      ><style>
-        div.grammarly-desktop-integration {
-          position: absolute;
-          width: 1px;
-          height: 1px;
-          padding: 0;
-          margin: -1px;
-          overflow: hidden;
-          clip: rect(0, 0, 0, 0);
-          white-space: nowrap;
-          border: 0;
-          -moz-user-select: none;
-          -webkit-user-select: none;
-          -ms-user-select: none;
-          user-select: none;
-        }
-
-        div.grammarly-desktop-integration:before {
-          content: attr(data-content);
-        }
-      </style>
-      <div
-        aria-label="grammarly-integration"
-        role="group"
-        tabindex="-1"
-        class="grammarly-desktop-integration"
-        data-content='{"mode":"full","isActive":true,"isUserDisabled":false}'
-      ></div></template
-  ></grammarly-desktop-integration>
 </html>
