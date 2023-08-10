@@ -103,7 +103,7 @@
   <body data-new-gr-c-s-check-loaded="14.1115.0" data-gr-ext-installed="">
     <div>
       <p id="toptextp">
-        <input type="text" id="toptext" placeholder="Text Above Timer" />
+        <input type="text" id="toptext" value="We'll be back shortly...." />
       </p>
       <div id="clockdiv" onclick="killClock()">
         <img
@@ -125,37 +125,7 @@
           <div class="smalltext">S</div>
         </div>
         <br />
-        <div id="exptime" style="margin: -20px 0px">
-          <span id="sysTime" style="display: inline-block"
-            >Current System Time:16:05</span
-          ><br /><select
-            id="listTZ"
-            onchange="setTZ(this.options[this.selectedIndex].value)"
-            style="display: inline-block"
-          >
-            <option value="0">LA / VANCOUVER</option>
-            <option value="1">DENVER / CALGARY</option>
-            <option value="2">CHICAGO / WINNIPEG</option>
-            <option value="3">NY / TORONTO</option>
-            <option value="4">HALIFAX</option>
-            <option value="5">NFLD</option>
-            <option value="6">LONDON / LISBON</option>
-            <option value="7">PARIS / STOCKHOLM</option>
-            <option value="8">HELSINKI / JOHANNESBURG</option>
-            <option value="9">DOHA / RIYADH</option>
-            <option value="10">INDIA / KOLKATA</option>
-            <option value="11">HONG KONG / SIGNAPORE</option>
-            <option value="12">TOKYO</option>
-            <option value="13">BUENOS AIRES</option>
-            <option value="14">SYDNEY</option></select
-          ><br /><span id="selTZ" style="display: inline-block"
-            >Selected TZ:EDT</span
-          ><br />Time expires at:<span
-            id="endtimespan"
-            style="margin-left: -10px"
-            >15:14</span
-          ><span id="TZsuffix" style="display: inline-block">EDT</span>
-        </div>
+        <div id="exptime" style="margin: -20px 0px"><br /><br /></div>
       </div>
       <div
         id="slider"
@@ -174,7 +144,11 @@
       </div>
       <div id="tz"></div>
       <p id="bottomtextp">
-        <input type="text" id="bottomtext" placeholder="Text Below Timer" />
+        <input
+          type="text"
+          id="bottomtext"
+          value="Take a break for a cup of coffee!"
+        />
       </p>
       <p id="info" style="display: block">
         Once started, click anywhere inside the timer to reset
@@ -272,7 +246,7 @@
             selTZ = moment.tz("Argentina/Buenos_Aires");
             globalTZ = "Argentina/Buenos_Aires";
         }
-        $("#selTZ").html("Selected TZ:" + selTZ.format("zz"));
+        $("#selTZ").html("Selected TZ: " + selTZ.format("zz"));
         $("#TZsuffix").html(selTZ.format("zz"));
         localStorage.setItem("awsws.classroomtimer.storedTZ", tzInput);
       }
